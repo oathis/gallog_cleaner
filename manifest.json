@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Gallog Cleaner",
+  "description": "디시인사이드 갤로그 목록에서 직접 선택한 항목 삭제를 보조합니다.",
+  "version": "0.1.0",
+  "permissions": ["storage", "activeTab", "notifications"],
+  "host_permissions": ["http://gallog.dcinside.com/*", "https://gallog.dcinside.com/*"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "icons": {
+    "128": "icons/icon_real.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/injected.js"],
+      "matches": ["http://gallog.dcinside.com/*", "https://gallog.dcinside.com/*"]
+    }
+  ],
+  "action": {
+    "default_title": "Gallog Cleaner",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://gallog.dcinside.com/*", "https://gallog.dcinside.com/*"],
+      "js": ["src/content.js"],
+      "css": ["src/content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
